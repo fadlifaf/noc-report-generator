@@ -495,7 +495,7 @@ function buatUptimeEmail() {
 
   const footer = `
 
-Jika ada pertanyaan tentang masalah ini, silakan hubungi tim IT NOC di [it.noc@surganyamotor.co.id](mailto:it.noc@surganyamotor.co.id) atau melalui call atau whatsapp +62 815-1040-1208.
+Jika ada pertanyaan tentang masalah ini, silakan hubungi tim IT NOC di it.noc@surganyamotor.co.id atau melalui call atau whatsapp +62 815-1040-1208.
 
 Terimakasih,
 ${d.picnoc}
