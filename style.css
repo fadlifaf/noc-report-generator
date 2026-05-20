@@ -128,10 +128,11 @@ body {
 
 .btn-modern {
   border: none;
-  border-radius: 14px;
+  border-radius: 10px;
 
-  padding: 13px;
+  padding: 8px 14px;
   font-weight: 600;
+  font-size: 14px;
 
   transition: all 0.25s ease;
 }
