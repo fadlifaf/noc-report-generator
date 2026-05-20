@@ -1,139 +1,317 @@
+// ==========================
+// GLOBAL VARIABLE
+// ==========================
 
-      let savedDowntime = null;
-      let savedStatus = null;
-      let savedCabang = null;
-      let savedTicket = null;
-      let updateInterval = null;
-      let updateCount = 0;
+let savedDowntime = null;
+let savedStatus = null;
+let savedCabang = null;
+let savedTicket = null;
+let updateCount = 0;
 
-      const emailMapping = {
-        HO: "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id",
+// ==========================
+// EMAIL MAPPING
+// ==========================
 
-        Jakarta:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.jkt.rafly@surganyamotor.co.id; it.jkt.rifani@surganyamotor.co.id; it.jkt.rizal@surganyamotor.co.id; it.jkt.zihan@surganyamotor.co.id",
+const emailMapping = {
+  HO: "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id",
 
-        Tangerang:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.tng.okta@surganyamotor.co.id; it.tng.alvito@surganyamotor.co.id",
+  Jakarta:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.jkt.rafly@surganyamotor.co.id; it.jkt.rifani@surganyamotor.co.id; it.jkt.rizal@surganyamotor.co.id; it.jkt.zihan@surganyamotor.co.id",
 
-        Bandung:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.bdg.atep@surganyamotor.co.id; it.bdg.aep@surganyamotor.co.id; it.bdg.akbar@surganyamotor.co.id",
+  Tangerang:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.tng.okta@surganyamotor.co.id; it.tng.alvito@surganyamotor.co.id",
 
-        Palembang:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.plg.arafik@surganyamotor.co.id; it.plg.paul@surganyamotor.co.id",
+  Bandung:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.bdg.atep@surganyamotor.co.id; it.bdg.aep@surganyamotor.co.id; it.bdg.akbar@surganyamotor.co.id",
 
-        Semarang:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.smg.dedy@surganyamotor.co.id; it.smg.adhi@surganyamotor.co.id",
+  Palembang:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.plg.arafik@surganyamotor.co.id; it.plg.paul@surganyamotor.co.id",
 
-        Surabaya:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.sby.yudha@surganyamotor.co.id; it.sby.adi@surganyamotor.co.id; it.sur.andra@surganyamotor.co.id; it.bagus@surganyamotor.co.id; it.smr.dito@surganyamotor.co.id",
+  Semarang:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.smg.dedy@surganyamotor.co.id; it.smg.adhi@surganyamotor.co.id",
 
-        Samarinda:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.sby.yudha@surganyamotor.co.id; it.sby.adi@surganyamotor.co.id; it.sur.andra@surganyamotor.co.id; it.bagus@surganyamotor.co.id; it.smr.dito@surganyamotor.co.id",
+  Surabaya:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.sby.yudha@surganyamotor.co.id; it.sby.adi@surganyamotor.co.id; it.sur.andra@surganyamotor.co.id; it.bagus@surganyamotor.co.id; it.smr.dito@surganyamotor.co.id",
 
-        Denpasar:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.dpr.toni@surganyamotor.co.id; it.dpr.yoga@surganyamotor.co.id",
+  Samarinda:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.sby.yudha@surganyamotor.co.id; it.sby.adi@surganyamotor.co.id; it.sur.andra@surganyamotor.co.id; it.bagus@surganyamotor.co.id; it.smr.dito@surganyamotor.co.id",
 
-        Banjarmasin:
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.bjm.alif@surganyamotor.co.id",
+  Denpasar:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.dpr.toni@surganyamotor.co.id; it.dpr.yoga@surganyamotor.co.id",
 
-        "cabang Planetban":
-          "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id",
-      };
+  Banjarmasin:
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id; it.bjm.alif@surganyamotor.co.id",
 
-      function ambilData() {
-        return {
-          gangguan: document.getElementById("gangguan").value,
-          cabang: document.getElementById("cabang").value,
-          ticket: document.getElementById("ticket").value,
+  "cabang Planetban":
+    "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id",
+};
 
-          waktu: document.getElementById("waktu").value,
-          uptime: document.getElementById("uptime").value,
+// ==========================
+// GET DATA
+// ==========================
 
-          tindakan: document.getElementById("tindakan").value,
+function ambilData() {
+  return {
+    gangguan: document.getElementById("gangguan").value,
+    cabang: document.getElementById("cabang").value,
+    ticket: document.getElementById("ticket").value,
 
-          kendala: document.getElementById("kendala").value,
-          impact: document.getElementById("impact").value,
-          penyebab: document.getElementById("penyebab").value,
-          status: document.getElementById("status").value,
-          picnoc: document.getElementById("picnoc").value,
-        };
-      }
+    waktu: document.getElementById("waktu").value,
+    uptime: document.getElementById("uptime").value,
 
-      function formatTanggal(dateString) {
-        if (!dateString) return "-";
+    tindakan: document.getElementById("tindakan").value,
 
-        const bulan = [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "Mei",
-          "Jun",
-          "Jul",
-          "Agu",
-          "Sep",
-          "Okt",
-          "Nov",
-          "Des",
-        ];
+    kendala: document.getElementById("kendala").value,
+    impact: document.getElementById("impact").value,
+    penyebab: document.getElementById("penyebab").value,
+    status: document.getElementById("status").value,
+    picnoc: document.getElementById("picnoc").value,
+  };
+}
 
-        const d = new Date(dateString);
+// ==========================
+// FORMAT TANGGAL
+// ==========================
 
-        const day = String(d.getDate()).padStart(2, "0");
-        const month = bulan[d.getMonth()];
-        const year = d.getFullYear();
+function parseDateTime24(input) {
+  // Accept:
+  // 1) YYYY-MM-DDTHH:mm (from datetime-local)
+  // 2) YYYY-MM-DD HH:mm (custom)
+  // Ensure 24-hour (00-23) and minutes (00-59)
+  if (!input) return null;
 
-        const hour = String(d.getHours()).padStart(2, "0");
-        const minute = String(d.getMinutes()).padStart(2, "0");
+  const s = String(input).trim();
 
-        return `${day} ${month} ${year} ${hour}:${minute} WIB`;
-      }
+  const m = s.match(
+    /^([0-9]{4})-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])(?:[T\s])([01][0-9]|2[0-3]):([0-5][0-9])$/,
+  );
+  if (!m) return null;
 
-      function hitungDurasi(start, end) {
-        if (!start || !end) return "-";
+  const year = Number(m[1]);
+  const month = Number(m[2]); // 1..12
+  const day = Number(m[3]);
+  const hour = Number(m[4]);
+  const minute = Number(m[5]);
 
-        const diff = new Date(end) - new Date(start);
+  // Use local time to match user expectation (WIB)
+  const dt = new Date(year, month - 1, day, hour, minute, 0, 0);
 
-        const hours = Math.floor(diff / (1000 * 60 * 60));
+  // Guard against invalid dates like 2026-02-31
+  if (
+    dt.getFullYear() !== year ||
+    dt.getMonth() !== month - 1 ||
+    dt.getDate() !== day ||
+    dt.getHours() !== hour ||
+    dt.getMinutes() !== minute
+  ) {
+    return null;
+  }
 
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  return dt;
+}
 
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+function formatTanggal(dateInput) {
+  const d = parseDateTime24(dateInput);
+  if (!d) return "-";
 
-        return `${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
-      }
+  const bulan = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mei",
+    "Jun",
+    "Jul",
+    "Agu",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Des",
+  ];
 
-      function showSuccess(message) {
-        Swal.fire({
-          icon: "success",
-          title: "Success",
-          text: message,
-          background: "#393E46",
-          color: "#EEEEEE",
-          confirmButtonColor: "#00ADB5",
-        });
-      }
+  const namaHari = d.toLocaleDateString("id-ID", { weekday: "long" });
 
-      function showInfo(message) {
-        Swal.fire({
-          icon: "info",
-          title: "Information",
-          text: message,
-          background: "#393E46",
-          color: "#EEEEEE",
-          confirmButtonColor: "#00ADB5",
-        });
-      }
+  const tanggal = String(d.getDate()).padStart(2, "0");
+  const monthIdx = d.getMonth();
+  const tahun = d.getFullYear();
 
-      function buatWA() {
-        const d = ambilData();
+  const jam = String(d.getHours()).padStart(2, "0");
+  const menit = String(d.getMinutes()).padStart(2, "0");
 
-        savedDowntime = d.waktu;
-        savedStatus = d.status;
-        savedCabang = d.cabang;
-        savedTicket = d.ticket;
+  return `${namaHari} | ${tanggal} ${bulan[monthIdx]} ${tahun} | ${jam}:${menit} WIB`;
+}
 
-        const laporan = `Dear All,
+function formatTanggalLengkap(dateString) {
+  if (!dateString) return "-";
+
+  const d = parseDateTimeStrict(dateString);
+  if (!d) return "-";
+
+  const hari = d.toLocaleDateString("id-ID", { weekday: "long" });
+
+  const bulan = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
+  ];
+
+  return `${hari} | ${String(d.getDate()).padStart(2, "0")} ${bulan[d.getMonth()]} ${d.getFullYear()} | ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")} WIB`;
+}
+// ==========================
+// HITUNG DURASI
+// ==========================
+
+function hitungDurasi(start, end) {
+  if (!start || !end) return "-";
+
+  const diff = new Date(end) - new Date(start);
+
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  return `${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+}
+
+// ==========================
+// ALERT
+// ==========================
+
+function showSuccess(message) {
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text: message,
+    background: "#393E46",
+    color: "#EEEEEE",
+    confirmButtonColor: "#00ADB5",
+  });
+}
+
+function showInfo(message) {
+  Swal.fire({
+    icon: "info",
+    title: "Information",
+    text: message,
+    background: "#393E46",
+    color: "#EEEEEE",
+    confirmButtonColor: "#00ADB5",
+  });
+}
+
+function parseDate(value) {
+  if (!value) return null;
+  return new Date(value); // datetime-local aman kalau langsung dipakai konsisten
+}
+// ==========================
+// GENERATE SUBJECT
+// ==========================
+
+function generateSubject(type, cabang, ticket, mode = "down") {
+  const t = (type || "").toLowerCase();
+  const originalType = type || "-";
+  const c = cabang || "-";
+  const tk = ticket || "-";
+
+  // =========================
+  // DOWN SUBJECT
+  // =========================
+  if (mode === "down") {
+    // INTERNET / NETWORK
+    if (t.includes("internet") || t.includes("network")) {
+      return `Koneksi Internet Cabang ${c} DOWN`;
+    }
+
+    // API
+    if (t.includes("api")) {
+      return `${originalType} di cabang ${c} DOWN`;
+    }
+
+    // SERVER
+    if (t.includes("server")) {
+      return `${originalType} di cabang ${c} DOWN`;
+    }
+
+    // APLIKASI
+    if (
+      t.includes("aplikasi") ||
+      t.includes("application") ||
+      t.includes("apps")
+    ) {
+      return `${originalType} di cabang ${c} Mengalami Gangguan`;
+    }
+
+    // DEFAULT
+    return `[DOWN] ${originalType} ${c} - ${tk}`;
+  }
+
+  // =========================
+  // UPTIME SUBJECT
+  // =========================
+  if (mode === "up") {
+    // INTERNET / NETWORK
+    if (t.includes("internet") || t.includes("network")) {
+      return `Koneksi Internet Cabang ${c} Kembali Normal`;
+    }
+
+    // API
+    if (t.includes("api")) {
+      return `${originalType} di cabang ${c} Kembali Normal`;
+    }
+
+    // SERVER
+    if (t.includes("server")) {
+      return `${originalType} di cabang ${c} Kembali Normal`;
+    }
+
+    // APLIKASI
+    if (
+      t.includes("aplikasi") ||
+      t.includes("application") ||
+      t.includes("apps")
+    ) {
+      return `${originalType} di cabang ${c} Kembali Normal`;
+    }
+
+    // DEFAULT
+    return `[UPTIME] ${originalType} ${c} Normal`;
+  }
+
+  // FALLBACK
+  return `${originalType} ${c}`;
+}
+
+// ==========================
+// GENERATE WA DOWN
+// ==========================
+
+function buatWA() {
+  const d = ambilData();
+
+  savedDowntime = d.waktu;
+  savedStatus = d.status;
+  savedCabang = d.cabang;
+  savedTicket = d.ticket;
+
+  // SUBJECT
+  const subject = generateSubject(d.gangguan, savedCabang, savedTicket, "down");
+
+  // karena emailSubject sekarang textarea
+  document.getElementById("emailSubject").value = subject;
+
+  // TEMPLATE WA
+  const laporan = `Dear All,
 
 Bersama ini kami memberitahukan bahwa saat ini ${d.gangguan} di cabang ${d.cabang} terpantau sedang mengalami masalah.
 
@@ -147,24 +325,38 @@ Bersama ini kami memberitahukan bahwa saat ini ${d.gangguan} di cabang ${d.caban
 Terimakasih,
 NOC-Team`;
 
-        document.getElementById("hasil").value = laporan;
+  document.getElementById("hasil").value = laporan;
 
-        navigator.clipboard.writeText(laporan);
+  navigator.clipboard.writeText(laporan);
 
-        showSuccess("Done tinggal copy template WA gessss");
-      }
+  showSuccess("Template WA berhasil dibuat!");
+}
 
-      function buatEmail() {
-        const d = ambilData();
+// ==========================
+// GENERATE EMAIL DOWN
+// ==========================
 
-        savedDowntime = d.waktu;
-        savedStatus = d.status;
-        savedCabang = d.cabang;
-        savedTicket = d.ticket;
+function buatEmail() {
+  const d = ambilData();
 
-        const email = emailMapping[d.cabang] || "-";
+  savedDowntime = d.waktu;
+  savedStatus = d.status;
+  savedCabang = d.cabang;
+  savedTicket = d.ticket;
 
-        const footer = `
+  // EMAIL TUJUAN
+  const email = emailMapping[d.cabang] || "-";
+
+  // SUBJECT
+  const subject = generateSubject(d.gangguan, d.cabang, d.ticket, "down");
+
+  // FIX textarea
+  document.getElementById("emailSubject").value = subject;
+
+  // FIX textarea
+  document.getElementById("emailOutput").value = email;
+
+  const footer = `
 
 Jika ada pertanyaan tentang masalah ini, silakan hubungi tim IT NOC di it.noc@surganyamotor.co.id atau melalui call atau whatsapp +62 815-1040-1208.
 
@@ -172,7 +364,8 @@ Terimakasih,
 ${d.picnoc}
 IT NOC - PT Surganya Motor Indonesia`;
 
-        const laporan = `Dear All,
+  // BODY EMAIL
+  const body = `Dear All,
 
 Bersama ini kami memberitahukan bahwa saat ini ${d.gangguan} di cabang ${d.cabang} terpantau sedang mengalami masalah.
 
@@ -185,17 +378,18 @@ Bersama ini kami memberitahukan bahwa saat ini ${d.gangguan} di cabang ${d.caban
 
 ${footer}`;
 
-        document.getElementById("emailOutput").innerText = email;
+  document.getElementById("hasil").value = body;
 
-        document.getElementById("hasil").value = laporan;
+  navigator.clipboard.writeText(body);
 
-        navigator.clipboard.writeText(laporan);
+  showSuccess("Template Email berhasil dibuat!");
+}
 
-        showSuccess("Done tinggal copy tempalte Email gessss");
-      }
-      
-      
-      function buatUpdateInfo() {
+// ==========================
+// UPDATE INFO
+// ==========================
+
+function buatUpdateInfo() {
   const d = ambilData();
 
   if (!savedDowntime) {
@@ -205,158 +399,251 @@ ${footer}`;
 
   updateCount++;
 
-  const now = new Date();
-  const waktuUpdate = formatTanggal(now);
+  const waktuUpdate = formatTanggal(new Date());
 
-  const laporan = `SUBJECT: Update Info Problem ${savedCabang} (Update ${updateCount})
+  const subject = `[UPDATE ${updateCount}] ${d.gangguan} ${d.cabang}`;
 
-Update Info Problem
-SUBJECT: Update ${d.gangguan} - di cabang ${d.cabang}
+  document.getElementById("emailSubject").value = subject;
 
-Waktu Update: ${waktuUpdate}
+  const laporan = `Dear All,
 
 Saat ini tim masih melakukan pengecekan terhadap gangguan yang terjadi.
 
-Status saat ini : ${d.status}
+• Waktu Update : ${waktuUpdate}
+• Status Saat Ini : ${d.status}
 
-Terimakasih,  
-NOC-TEAM`;
+Terimakasih,
+NOC-Team`;
 
   document.getElementById("hasil").value = laporan;
+
   navigator.clipboard.writeText(laporan);
 
-  showSuccess("Update Info berhasil dibuat!");
+  showSuccess("Update info berhasil dibuat!");
 }
-      
 
-      function buatUptimeWA() {
-        const d = ambilData();
+// ==========================
+// UPTIME WA
+// ==========================
 
-        if (!savedDowntime) {
-          showInfo("Generate template down terlebih dahulu!");
+function buatUptimeWA() {
+  const d = ambilData();
 
-          return;
-        }
+  if (!savedDowntime) {
+    showInfo("Generate template down terlebih dahulu!");
+    return;
+  }
 
-        const downtimeFormat = formatTanggal(savedDowntime);
+  const downtimeFormat = formatTanggalLengkap(savedDowntime);
 
-        const uptimeFormat = formatTanggal(d.uptime);
+  const uptimeFormat = formatTanggalLengkap(d.uptime);
 
-        const duration = hitungDurasi(savedDowntime, d.uptime);
+  const duration = hitungDurasi(savedDowntime, d.uptime);
 
-        const laporan = `SUBJECT: Koneksi Internet Cabang ${savedCabang} Kembali Normal
+  const subject = generateSubject(d.gangguan, savedCabang, savedTicket, "up");
 
-Dear All,
+  document.getElementById("emailSubject").value = subject;
 
-Bersama ini kami informasikan bahwa masalah koneksi INTERNET ${savedCabang} telah berhasil diselesaikan. Semua layanan kini beroperasi dengan normal.
+  const laporan = `Dear All,
+
+Bersama ini kami informasikan bahwa gangguan di cabang ${savedCabang} telah berhasil diselesaikan dan layanan sudah kembali normal.
 
 • No Ticket : ${savedTicket}
-• Down Time : ${savedStatus} | ${downtimeFormat}
-• Up Time : ${savedStatus} | ${uptimeFormat}
+• Down Time : ${downtimeFormat}
+• Up Time : ${uptimeFormat}
 • Duration Downtime : ${duration}
 • Jenis Gangguan : ${d.impact}
 • Tindakan : ${d.tindakan}
-• Status : Network Link/Internet Cabang ${savedCabang} Kembali Normal
+• Status : Normal
 
 Terimakasih,
-NOC-TEAM`;
+NOC-Team`;
 
-        document.getElementById("hasil").value = laporan;
 
-        navigator.clipboard.writeText(laporan);
+  document.getElementById("hasil").value = laporan;
 
-        showSuccess("Done tinggal copy tempalte WA gessss!");
-      }
+  navigator.clipboard.writeText(laporan);
 
-      function buatUptimeEmail() {
-        const d = ambilData();
+  showSuccess("Template Uptime WA berhasil dibuat!");
+}
 
-        if (!savedDowntime) {
-          showInfo("Generate template down terlebih dahulu!");
+// ==========================
+// UPTIME EMAIL
+// ==========================
 
-          return;
-        }
+function buatUptimeEmail() {
+  const d = ambilData();
 
-        const email = emailMapping[savedCabang] || "-";
+  if (!savedDowntime) {
+    showInfo("Generate template down terlebih dahulu!");
+    return;
+  }
 
-        const downtimeFormat = formatTanggal(savedDowntime);
+  const email = emailMapping[savedCabang] || "-";
 
-        const uptimeFormat = formatTanggal(d.uptime);
+  const downtimeFormat = formatTanggalLengkap(savedDowntime);
 
-        const duration = hitungDurasi(savedDowntime, d.uptime);
+  const uptimeFormat = formatTanggalLengkap(d.uptime);
 
-        const footer = `
+  const duration = hitungDurasi(savedDowntime, d.uptime);
 
-Jika ada pertanyaan tentang masalah ini, silakan hubungi tim IT NOC di it.noc@surganyamotor.co.id atau melalui call atau whatsapp +62 815-1040-1208.
+  const subject = generateSubject(d.gangguan, savedCabang, savedTicket, "up");
+
+  document.getElementById("emailSubject").value = subject;
+
+  document.getElementById("emailOutput").value = email;
+
+  const footer = `
+
+Jika ada pertanyaan tentang masalah ini, silakan hubungi tim IT NOC di [it.noc@surganyamotor.co.id](mailto:it.noc@surganyamotor.co.id) atau melalui call atau whatsapp +62 815-1040-1208.
 
 Terimakasih,
 ${d.picnoc}
 IT NOC - PT Surganya Motor Indonesia`;
 
-        const laporan = `SUBJECT: Koneksi Internet Cabang ${savedCabang} Kembali Normal
+  const laporan = `Dear All,
 
-Dear All,
-
-Bersama ini kami informasikan bahwa masalah koneksi INTERNET ${savedCabang} telah berhasil diselesaikan. Semua layanan kini beroperasi dengan normal.
+Bersama ini kami informasikan bahwa gangguan di cabang ${savedCabang} telah berhasil diselesaikan dan layanan kini beroperasi normal kembali.
 
 • No Ticket : ${savedTicket}
-• Down Time : ${savedStatus} | ${downtimeFormat}
-• Up Time : ${savedStatus} | ${uptimeFormat}
+• Down Time : ${downtimeFormat}
+• Up Time : ${uptimeFormat}
 • Duration Downtime : ${duration}
 • Jenis Gangguan : ${d.impact}
 • Tindakan : ${d.tindakan}
-• Status : Network Link/Internet Cabang ${savedCabang} Kembali Normal
+• Status : Normal
 
 ${footer}`;
 
-        document.getElementById("emailOutput").innerText = email;
 
-        document.getElementById("hasil").value = laporan;
+  document.getElementById("hasil").value = laporan;
 
-        navigator.clipboard.writeText(laporan);
+  navigator.clipboard.writeText(laporan);
 
-        showSuccess("Done tinggal copy tempalte Email gessss");
-      }
+  showSuccess("Template Uptime Email berhasil dibuat!");
+}
 
-      function clearForm() {
-        document.querySelectorAll("input").forEach((input) => {
-          input.value = "";
-        });
+// ==========================
+// CLEAR FORM
+// ==========================
 
-        document.getElementById("hasil").value = "";
+function clearForm() {
+  document.querySelectorAll("input").forEach((input) => {
+    input.value = "";
+  });
 
-        document.getElementById("emailOutput").innerText = "-";
+  document.getElementById("hasil").value = "";
+  document.getElementById("emailOutput").value = "";
+  document.getElementById("emailSubject").value = "";
 
-        savedDowntime = null;
-        savedStatus = null;
-        savedCabang = null;
-        savedTicket = null;
+  savedDowntime = null;
+  savedStatus = null;
+  savedCabang = null;
+  savedTicket = null;
 
-        showInfo("udah acu delete ya!");
-      }
+  showInfo("Form berhasil dibersihkan!");
+}
 
-     function copyText() {
-        const text = document.getElementById("hasil").value;
+// ==========================
+// COPY TEMPLATE
+// ==========================
 
-        if (!text || text.trim() === "") {
-          showInfo("Belum ada template bwanggg!");
-          return;
-        }
+function copyText() {
+  const text = document.getElementById("hasil").value;
 
-        navigator.clipboard.writeText(text);
-        showSuccess("Template berhasil dicopy coyy!");
-      }
+  if (!text || text.trim() === "") {
+    showInfo("Belum ada template!");
+    return;
+  }
 
-      function copyEmail() {
-         const email = document.getElementById("emailOutput").innerText;
+  navigator.clipboard.writeText(text);
 
-        if (!email || email.trim() === "" || email === "-") {
-             showInfo("Belum ada email bwangg!");
-             return;
-        }
+  showSuccess("Template berhasil dicopy!");
+}
 
-        navigator.clipboard.writeText(email);
-         showSuccess("Email udah dicopy!");
-        }       
+// ==========================
+// COPY EMAIL
+// ==========================
 
-    
+function copyEmail() {
+  const email = document.getElementById("emailOutput").value;
+
+  if (!email || email.trim() === "" || email === "-") {
+    showInfo("Belum ada email bwangg!");
+    return;
+  }
+
+  navigator.clipboard.writeText(email);
+
+  showSuccess("Email udah dicopy!");
+}
+
+// ==========================
+// COPY SUBJECT
+// ==========================
+
+function copySubject() {
+  const text = document.getElementById("emailSubject").value;
+
+  if (!text || text.trim() === "") {
+    showInfo("Belum ada subject!");
+    return;
+  }
+
+  navigator.clipboard.writeText(text);
+
+  showSuccess("Subject udah dicopy!");
+}
+
+// ==========================
+// DATE
+// ==========================
+
+function formatTanggalLengkap(dateInput) {
+  if (!dateInput) return "-";
+
+  const d = parseDateTime24(dateInput);
+  if (!d) return "-";
+
+  const hari = d.toLocaleDateString("id-ID", { weekday: "long" });
+
+  const bulan = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mei",
+    "Jun",
+    "Jul",
+    "Agu",
+    "Sep",
+    "Okt",
+    "Nov",
+    "Des",
+  ];
+
+  const tanggal = String(d.getDate()).padStart(2, "0");
+  const bulanIdx = d.getMonth();
+  const tahun = d.getFullYear();
+
+  const jam = String(d.getHours()).padStart(2, "0");
+  const menit = String(d.getMinutes()).padStart(2, "0");
+
+  return `${hari} | ${tanggal} ${bulan[bulanIdx]} ${tahun} | ${jam}:${menit} WIB`;
+}
+
+function parseDateTimeStrict(value) {
+  if (!value) return null;
+
+  const m = value
+    .trim()
+    .match(/^(\d{4})-(\d{2})-(\d{2})\s([01]\d|2[0-3]):([0-5]\d)$/);
+
+  if (!m) return null;
+
+  const [_, y, mo, d, h, mi] = m;
+
+  const date = new Date(+y, +mo - 1, +d, +h, +mi);
+
+  return date;
+}
