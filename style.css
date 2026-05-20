@@ -129,6 +129,7 @@ body {
 .btn-modern {
   border: none;
   border-radius: 10px;
+  min-width: 140px
 
   padding: 8px 14px;
   font-weight: 600;
