@@ -313,4 +313,12 @@ ${footer}`;
 
         showSuccess("Email udah dicopy!");
       }
+
+       function copyWa() {
+        const email = document.getElementById("waOutput").innerText;
+
+        navigator.clipboard.writeText(email);
+
+        showSuccess("WA udah dicopy!");
+      }
     
