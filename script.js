@@ -317,9 +317,3 @@ ${footer}`;
 
         showSuccess("Email udah dicopy!");
       }
-
-        navigator.clipboard.writeText(email);
-
-        showSuccess("WA udah dicopy!");
-      }
-    
