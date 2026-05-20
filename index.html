@@ -20,94 +20,85 @@
   <!-- SWEET ALERT -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- CSS -->
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
 
-  <div class="container py-4">
+<div class="container py-4">
 
-    <!-- HEADER -->
-    <div class="text-center mb-4">
-      <div class="main-title">
-        <i class="bi bi-shield-check"></i>
-        NOC Report Generator
-      </div>
-
-      <div class="sub-title">
-        Generate Template WhatsApp, Email & Uptime Monitoring
-      </div>
+  <!-- HEADER -->
+  <div class="text-center mb-4">
+    <div class="main-title">
+      <i class="bi bi-shield-check"></i>
+      NOC Report Generator
     </div>
+    <div class="sub-title">
+      Generate Template WhatsApp, Email & Uptime Monitoring
+    </div>
+  </div>
 
-    <div class="row g-4 align-items-start">
+  <div class="row g-4 align-items-start">
 
-      <!-- BAGIAN KIRI -->
-      <div class="col-lg-5">
+    <!-- LEFT -->
+    <div class="col-lg-5">
 
-        <!-- ===================== -->
-        <!-- FORM DOWN -->
-        <!-- ===================== -->
-        <div class="glass-card mb-4">
+      <!-- FORM DOWN -->
+      <div class="glass-card mb-4">
 
-          <div class="form-section-title">
-            <span class="badge-custom">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              FORM DOWN
-            </span>
-          </div>
+        <div class="form-section-title">
+          <span class="badge-custom">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            FORM DOWN
+          </span>
+        </div>
 
-          <div class="mb-3">
-            <label class="form-label">Kendala</label>
-            <input class="form-control" id="gangguan" list="gangguanList"
-              placeholder="Pilih atau ketik kendala..." />
+        <div class="mb-3">
+          <label class="form-label">Kendala / Gangguan</label>
+          <input class="form-control" id="gangguan" list="gangguanList" 
+          placeholder="Pilih atau ketik Kendala / Gangguan..."/>
+        </div>
 
-            <datalist id="gangguanList">
-              <option value="Server"></option>
-              <option value="Network"></option>
-              <option value="API"></option>
-              <option value="Aplikasi"></option>
-              <option value="API DAC"></option>
-              <option value="API IMEN INSERT"></option>
-              <option value="API IMEN SELECT"></option>
-              <option value="APLIKASI SIAP"></option>
-              <option value="APLIKASI DAC"></option>
-            </datalist>
-          </div>
+        <datalist id="gangguanList">
+          <option value="Server"></option>
+          <option value="Network"></option>
+          <option value="API"></option>
+          <option value="Aplikasi"></option>
+        </datalist>
 
-          <div class="mb-3">
-            <label class="form-label">Cabang</label>
-            <input class="form-control" id="cabang" list="cabangList"
-              placeholder="Pilih atau ketik cabang..." />
+        <div class="mb-3">
+          <label class="form-label">Cabang</label>
+          <input class="form-control" id="cabang" list="cabangList" 
+           placeholder="Pilih atau ketik Cabang..."/>
+        </div>
 
-            <datalist id="cabangList">
-              <option value="HO"></option>
-              <option value="Jakarta"></option>
-              <option value="Tangerang"></option>
-              <option value="Bandung"></option>
-              <option value="Surabaya"></option>
-              <option value="Semarang"></option>
-              <option value="Palembang"></option>
-              <option value="Denpasar"></option>
-              <option value="Samarinda"></option>
-              <option value="Banjarmasin"></option>
-              <option value="Pekanbaru"></option>
-              <option value="Cabang Planetban"></option>
-            </datalist>
-          </div>
+        <datalist id="cabangList">
+          <option value="HO"></option>
+          <option value="Jakarta"></option>
+          <option value="Tangerang"></option>
+          <option value="Bandung"></option>
+          <option value="Surabaya"></option>
+          <option value="Semarang"></option>
+          <option value="Palembang"></option>
+          <option value="Denpasar"></option>
+          <option value="Samarinda"></option>
+          <option value="Banjarmasin"></option>
+          <option value="Pekanbaru"></option>
+          <option value="Cabang Planetban"></option>
+        </datalist>
 
-          <div class="mb-3">
-            <label class="form-label">No Ticket</label>
-            <input class="form-control" id="ticket" type="text"
-              placeholder="Pake # ges jangan lupa" />
-          </div>
+        <div class="mb-3">
+          <label class="form-label">No Ticket</label>
+          <input class="form-control" id="ticket" type="text" 
+          placeholder="Jangan lupa tiket, Paket # juga ya..."/>
+        </div>
 
-          <div class="mb-3">
-            <label class="form-label">Tanggal Pembuatan / Down Time</label>
-            <input class="form-control" id="waktu" type="datetime-local" />
-          </div>
+        <div class="mb-3">
+          <label class="form-label">Waktu Down</label>
+          <input class="form-control" id="waktu" type="datetime-local" />
+        </div>
 
-          <div class="mb-3">
+       <div class="mb-3">
             <label class="form-label">Laporan Kendala</label>
             <input class="form-control" id="kendala" list="kendalaList"
               placeholder="Pilih atau ketik..." />
@@ -128,8 +119,8 @@
               <option value="Pengguna/toko mengalami gangguan dalam layanan"></option>
             </datalist>
           </div>
-
-          <div class="mb-3">
+            
+       <div class="mb-3">
             <label class="form-label">Indikasi Penyebab</label>
             <input class="form-control" id="penyebab" list="penyebabList"
               placeholder="Pilih atau ketik..." />
@@ -140,7 +131,7 @@
             </datalist>
           </div>
 
-          <div class="mb-3">
+       <div class="mb-3">
             <label class="form-label">Status</label>
             <input class="form-control" id="status" list="statusList"
               placeholder="Pilih atau ketik status..." />
@@ -160,7 +151,7 @@
             </datalist>
           </div>
 
-          <div class="mb-4">
+      <div class="mb-4">
             <label class="form-label">PIC NOC</label>
             <input class="form-control" id="picnoc" list="picList"
               placeholder="Pilih atau ketik PIC..." />
@@ -174,131 +165,123 @@
             </datalist>
           </div>
 
-          <div class="d-grid gap-2">
-            <button class="btn btn-modern btn-primary-modern" onclick="buatWA()">
-              <i class="bi bi-whatsapp"></i>
-              Generate Template WA
-            </button>
 
-            <button class="btn btn-modern btn-success-modern" onclick="buatEmail()">
-              <i class="bi bi-envelope-fill"></i>
-              Generate Template Email
-            </button>
-          </div>
+       <div class="d-flex gap-2 justify-content-end flex-wrap">
 
+  <button class="btn btn-primary-modern btn-modern" onclick="buatWA()">
+    <i class="bi bi-whatsapp me-1"></i>
+    Generate WA
+  </button>
+
+  <button class="btn btn-success-modern btn-modern" onclick="buatEmail()">
+    <i class="bi bi-envelope-fill me-1"></i>
+    Generate Email
+  </button>
+
+  <button class="btn btn-warning btn-modern" onclick="buatUpdateInfo()">
+    <i class="bi bi-arrow-repeat me-1"></i>
+    Update Info
+  </button>
+
+</div>
+      
+      </div>
+
+      <!-- UPTIME -->
+      <div class="glass-card">
+
+        <div class="form-section-title">
+          <span class="badge-custom badge-warning">
+            <i class="bi bi-arrow-up-circle-fill"></i>
+            FORM UPTIME
+          </span>
         </div>
-        
-        <!-- FORM UPTIME -->
-        <div class="glass-card">
 
-          <div class="form-section-title">
-            <span class="badge-custom badge-warning">
-              <i class="bi bi-arrow-up-circle-fill"></i>
-              FORM UPTIME
-            </span>
-          </div>
+        <div class="mb-3">
+          <label class="form-label">Up Time</label>
+          <input class="form-control" id="uptime" type="datetime-local" />
+        </div>
 
-          <div class="mb-3">
-            <label class="form-label">Up Time</label>
-            <input class="form-control" id="uptime" type="datetime-local" />
-          </div>
+        <div class="mb-4">
+          <label class="form-label">Tindakan</label>
+          <input class="form-control" id="tindakan" type="text" 
+           placeholder="Ketik tindakan..."/>
+        </div>
+<div class="d-flex gap-2 justify-content-end flex-wrap">
 
-          <div class="mb-4">
-            <label class="form-label">Tindakan</label>
-            <input class="form-control" id="tindakan" type="text"
-              placeholder="Input tindakan perbaikan..." />
-          </div>
+  <button class="btn btn-modern btn-warning-modern" onclick="buatUptimeWA()">
+    <i class="bi bi-whatsapp me-1"></i>
+    Uptime WA
+  </button>
 
-          <div class="d-grid gap-2">
-            <button class="btn btn-modern btn-warning-modern" onclick="buatUptimeWA()">
-              <i class="bi bi-whatsapp"></i>
-              Generate Uptime WA
+  <button class="btn btn-modern btn-success-modern" onclick="buatUptimeEmail()">
+    <i class="bi bi-envelope-fill me-1"></i>
+    Uptime Email
+  </button>
+
+  <button class="btn btn-modern btn-danger-modern" onclick="clearForm()">
+    <i class="bi bi-trash-fill me-1"></i>
+    Clear Form
+  </button>
+
+</div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-lg-7">
+
+      <div class="glass-card h-100">
+
+        <h4 class="form-section-title mb-4">
+          <i class="bi bi-file-earmark-text"></i>
+          Output Template
+        </h4>
+
+        <!-- EMAIL OUTPUT -->
+        <div class="mb-4">
+
+          <label class="form-label">Email Tujuan</label>
+
+          <div class="copy-btn-group">
+            <button class="btn btn-success-modern btn-modern" onclick="copyEmail()">
+              Copy Email
             </button>
+          </div>
 
-            <button class="btn btn-modern btn-success-modern" onclick="buatUptimeEmail()">
-              <i class="bi bi-envelope-fill"></i>
-              Generate Uptime Email
-            </button>
+          <div class="output-box" id="emailOutput">-</div>
+        </div>
 
-            <button class="btn btn-modern btn-danger-modern" onclick="clearForm()">
-              <i class="bi bi-trash-fill"></i>
-              Clear All Form
+        <!-- TEMPLATE OUTPUT -->
+        <div class="mb-3">
+
+          <label class="form-label">Template Output</label>
+
+          <div class="copy-btn-group">
+            <button class="btn btn-success-modern btn-modern" onclick="copyText()">
+              Copy Template
             </button>
           </div>
 
+          <textarea class="form-control" id="hasil" rows="20"></textarea>
         </div>
 
       </div>
 
-<!-- BAGIAN KANAN / OUTPUT -->
-<div class="col-lg-7">
-
-  <div class="glass-card h-100">
-
-    <h4 class="form-section-title mb-4">
-      <i class="bi bi-file-earmark-text"></i>
-      Output Template
-    </h4>
-    
-    <div class="mb-4">
-      <label class="form-label">Email Tujuan</label>
- <!-- COPY EMAIL -->
-    <div class="copy-btn-group">
-
-      <button
-        class="btn btn-success-modern btn-modern"
-        onclick="copyEmail()"
-      >
-        <i class="bi bi-envelope-fill"></i>
-        Copy Email
-      </button>
-
-    </div>
-      <div class="output-box" id="emailOutput">
-        -
-      </div>
     </div>
 
+  </div>
 
-    <div class="mb-3">
-      <label class="form-label">Template Output</label>
- <!-- COPY TEMPLATE -->
-    <div class="copy-btn-group">
-
-      <button
-        class="btn btn-success-modern btn-modern"
-        onclick="copyText()"
-      >
-        <i class="bi bi-envelope-fill"></i>
-        Copy Template
-      </button>
-
-    </div>
-      <textarea
-        class="form-control"
-        id="hasil"
-        rows="20"
-        placeholder="Hasil template akan muncul di sini..."
-      ></textarea>
-    </div>
-
+  <div class="text-center mt-4">
+    <small style="color:#9ca3af">
+      NOC Report Generator © 2026 — PlanetBan
+    </small>
   </div>
 
 </div>
 
-    </div>
-
-    <!-- FOOTER -->
-    <div class="text-center mt-4">
-      <small style="color: #9ca3af">
-        NOC Report Generator © 2026 — PlanetBan
-      </small>
-    </div>
-
-  </div>
-
-  <!-- SCRIPT JS -->
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
