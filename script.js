@@ -302,18 +302,22 @@ ${footer}`;
         const text = document.getElementById("hasil").value;
 
         if (!text || text.trim() === "") {
-          showInfo("Belum ada template!");
+          showInfo("Belum ada template bwanggg!");
           return;
         }
 
         navigator.clipboard.writeText(text);
-        showSuccess("Template berhasil dicopy!");
+        showSuccess("Template berhasil dicopy coyy!");
       }
 
       function copyEmail() {
-        const email = document.getElementById("emailOutput").innerText;
+         const email = document.getElementById("emailOutput").innerText;
+
+        if (!email || email.trim() === "" || email === "-") {
+             showInfo("Belum ada email bwangg!");
+             return;
+        }
 
         navigator.clipboard.writeText(email);
-
-        showSuccess("Email udah dicopy!");
-      }
+         showSuccess("Email udah dicopy!");
+        }       
