@@ -3,6 +3,8 @@
       let savedStatus = null;
       let savedCabang = null;
       let savedTicket = null;
+      let updateInterval = null;
+      let updateCount = 0;
 
       const emailMapping = {
         HO: "mahendra@surganyamotor.co.id; ernest@surganyamotor.co.id; eky.purnomo@surganyamotor.co.id; marzuki@surganyamotor.co.id; ridlo.ginanjar@surganyamotor.co.id; it.ade@surganyamotor.co.id; it.dinda@surganyamotor.co.id; it.demas@surganyamotor.co.id; it.arief@surganyamotor.co.id; it.yudhaksatria@surganyamotor.co.id; it.angga@surganyamotor.co.id; it.bambang@surganyamotor.co.id; it.ridhwan@surganyamotor.co.id; it.andri@surganyamotor.co.id; toha@surganyamotor.co.id; it.rizkyfirnanda@surganyamotor.co.id; it.agas@surganyamotor.co.id; it.noc@surganyamotor.co.id; it.prasomya@surganyamotor.co.id",
@@ -191,6 +193,41 @@ ${footer}`;
 
         showSuccess("Done tinggal copy tempalte Email gessss");
       }
+      
+      
+      function buatUpdateInfo() {
+  const d = ambilData();
+
+  if (!savedDowntime) {
+    showInfo("Generate DOWN terlebih dahulu!");
+    return;
+  }
+
+  updateCount++;
+
+  const now = new Date();
+  const waktuUpdate = formatTanggal(now);
+
+  const laporan = `SUBJECT: Update Info Problem ${savedCabang} (Update ${updateCount})
+
+Update Info Problem
+SUBJECT: Update ${d.gangguan} - di cabang ${d.cabang}
+
+Waktu Update: ${waktuUpdate}
+
+Saat ini tim masih melakukan pengecekan terhadap gangguan yang terjadi.
+
+Status saat ini : ${d.status}
+
+Terimakasih,  
+NOC-TEAM`;
+
+  document.getElementById("hasil").value = laporan;
+  navigator.clipboard.writeText(laporan);
+
+  showSuccess("Update Info berhasil dibuat!");
+}
+      
 
       function buatUptimeWA() {
         const d = ambilData();
@@ -321,3 +358,5 @@ ${footer}`;
         navigator.clipboard.writeText(email);
          showSuccess("Email udah dicopy!");
         }       
+
+    
