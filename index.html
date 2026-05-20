@@ -105,8 +105,17 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Waktu Down</label>
-          <input class="form-control" id="waktu" type="datetime-local" />
+          <label class="form-label">Waktu Down (24 jam, contoh 15:30)</label>
+          <input
+            class="form-control"
+            id="waktu"
+            type="text"
+            inputmode="numeric"
+            placeholder="2026-05-20 15:30"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="form-text" style="color:#9ca3af">Format: YYYY-MM-DD HH:mm (24 jam)</div>
         </div>
 
        <div class="mb-3">
@@ -179,7 +188,7 @@
 
        <div class="d-flex gap-2 justify-content-end flex-wrap">
 
-  <button class="btn btn-primary-modern btn-modern" onclick="buatWA()">
+  <button class="btn btn-warning-modern btn-modern" onclick="buatWA()">
     <i class="bi bi-whatsapp me-1"></i>
     Generate WA
   </button>
@@ -189,7 +198,7 @@
     Generate Email
   </button>
 
-  <button class="btn btn-warning btn-modern" onclick="buatUpdateInfo()">
+  <button class="btn btn-primary btn-modern" onclick="buatUpdateInfo()">
     <i class="bi bi-arrow-repeat me-1"></i>
     Update Info
   </button>
@@ -209,8 +218,17 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Up Time</label>
-          <input class="form-control" id="uptime" type="datetime-local" />
+          <label class="form-label">Up Time (24 jam)</label>
+          <input
+            class="form-control"
+            id="uptime"
+            type="text"
+            inputmode="numeric"
+            placeholder="2026-05-20 15:30"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <div class="form-text" style="color:#9ca3af">Format: YYYY-MM-DD HH:mm (24 jam)</div>
         </div>
 
         <div class="mb-4">
@@ -240,49 +258,92 @@
 
     </div>
 
-    <!-- RIGHT -->
-    <div class="col-lg-6">
+    <!-- KANAN -->
+<div class="col-lg-6">
 
-      <div class="glass-card h-100">
+  <div class="glass-card h-100">
 
-        <h4 class="form-section-title mb-4">
-          <i class="bi bi-file-earmark-text"></i>
-          Output Template
-        </h4>
+    <h4 class="form-section-title mb-4">
+      <i class="bi bi-file-earmark-text"></i>
+      Output Template
+    </h4>
 
-        <!-- EMAIL OUTPUT -->
-        <div class="mb-4">
+    <!-- SUBJECT EMAIL -->
+    <div class="mb-4">
 
-          <label class="form-label">Email Tujuan</label>
+      <label class="form-label">
+        <i class="bi bi-tag-fill me-1"></i>
+        Email Subject
+      </label>
 
-          <div class="copy-btn-group">
-            <button class="btn btn-success-modern btn-modern" onclick="copyEmail()">
-              Copy Email
-            </button>
-          </div>
-
-          <div class="output-box" id="emailOutput">-</div>
-        </div>
-
-        <!-- TEMPLATE OUTPUT -->
-        <div class="mb-3">
-
-          <label class="form-label">Template Output</label>
-
-          <div class="copy-btn-group">
-            <button class="btn btn-success-modern btn-modern" onclick="copyText()">
-              Copy Template
-            </button>
-          </div>
-
-          <textarea class="form-control" id="hasil" rows="20"></textarea>
-        </div>
-
+      <div class="copy-btn-group mb-2">
+        <button class="btn btn-success-modern btn-modern" onclick="copySubject()">
+          <i class="bi bi-copy me-1"></i>
+          Copy Subject
+        </button>
       </div>
+
+      <textarea 
+        class="form-control"
+        id="emailSubject"
+        rows="2"
+        placeholder="Email subject..."
+      ></textarea>
+
+    </div>
+
+    <!-- EMAIL OUTPUT -->
+    <div class="mb-4">
+
+      <label class="form-label">
+        <i class="bi bi-envelope-fill me-1"></i>
+        Email Tujuan
+      </label>
+
+      <div class="copy-btn-group mb-2">
+        <button class="btn btn-success-modern btn-modern" onclick="copyEmail()">
+          <i class="bi bi-copy me-1"></i>
+          Copy Email
+        </button>
+      </div>
+
+      <textarea
+        class="form-control"
+        id="emailOutput"
+        rows="5"
+        readonly
+        placeholder="Email recipient..."
+      ></textarea>
+
+    </div>
+
+    <!-- TEMPLATE OUTPUT -->
+    <div class="mb-3">
+
+      <label class="form-label">
+        <i class="bi bi-file-text-fill me-1"></i>
+        Template Output
+      </label>
+
+      <div class="copy-btn-group mb-2">
+        <button class="btn btn-success-modern btn-modern" onclick="copyText()">
+          <i class="bi bi-copy me-1"></i>
+          Copy Template
+        </button>
+      </div>
+
+      <textarea
+        class="form-control"
+        id="hasil"
+        rows="20"
+        placeholder="Generated template..."
+      ></textarea>
 
     </div>
 
   </div>
+
+</div>
 
   <div class="text-center mt-4">
     <small style="color:#9ca3af">
