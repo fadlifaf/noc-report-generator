@@ -298,12 +298,16 @@ ${footer}`;
         showInfo("udah acu delete ya!");
       }
 
-      function copyText() {
+     function copyText() {
         const text = document.getElementById("hasil").value;
 
-        navigator.clipboard.writeText(text);
+        if (!text || text.trim() === "") {
+          showInfo("Belum ada template!");
+          return;
+        }
 
-        showSuccess("Template udah dicopy!");
+        navigator.clipboard.writeText(text);
+        showSuccess("Template berhasil dicopy!");
       }
 
       function copyEmail() {
